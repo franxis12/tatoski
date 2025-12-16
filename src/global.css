@@ -1,10 +1,24 @@
 @import "tailwindcss";
 
 :root {
-    --PrimaryColor: #3ca2a2;
+    --PrimaryColor: #3CA2A2;
     --SecondaryColor: #9276a3;
+    
     --BgColor: #DFECE6;
+    --CardBg: #333;
+
     --TextColor: #fff;
+
+    --BtnPrimary: #215A6D;
+    --BtnPrimary_Hover: #3CA2A2;
+    --BtnPrimary_Click: #2D2D29;
+    --BtnPrimary_Shadow: #000;
+
+    --InputColor: #333;
+    --InputBorder: #fff;
+    --InputShadow: #000;
+
+
     
 }
 
