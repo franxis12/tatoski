@@ -1,7 +1,9 @@
 import React from "react";
 
 function Header() {
-  return <div className="w-full bg-amber-500 h-20"></div>;
+  return (
+    <header className="col-span-12 row-start-1 row-end-2 bg-(--PrimaryColor) h-20"></header>
+  );
 }
 
 export default Header;
