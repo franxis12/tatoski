@@ -5,7 +5,7 @@ import Content from "../components/Content";
 import AddApplication from "../components/AddApplication";
 
 function Dashboard() {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
 
   return (
     <div className="grid h-screen w-screen grid-cols-12 grid-rows-[80px_1fr] bg-(--PrimaryColor)">
