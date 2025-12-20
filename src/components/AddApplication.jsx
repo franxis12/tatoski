@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../components/Input";
 
 function AddApplication() {
+  const [jobTitle, setJobTitle] = useState(() => {
+    return localStorage.getItem("jobTitle") != null
+      ? localStorage.getItem("jobTitle")
+      : "";
+  });
+  const [salary, setSalary] = useState(0);
+  const [type, setType] = useState("");
+  const [description, setDescription] = useState("");
+  console.log(jobTitle);
+
   //
   return (
     <div className="bg-black/80 backdrop-blur-sm w-screen h-screen absolute flex items-center justify-center">
@@ -12,6 +22,8 @@ function AddApplication() {
             <input
               placeholder="Job title"
               className="bg-white rounded-md h-8 p-3"
+              value={jobTitle}
+              onChange={(e) => setJobTitle(e.target.value)}
             ></input>
           </div>
           {/*Where did applied*/}
@@ -53,6 +65,9 @@ function AddApplication() {
             className="bg-white w-full m-h-full rounded-xl  h-90 p-3"
           ></textarea>
         </div>
+        <button className="bg-blue-500 hover:bg-amber-200 p-2 rounded-2xl">
+          Save job Application
+        </button>
       </div>
     </div>
   );
