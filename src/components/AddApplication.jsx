@@ -12,6 +12,10 @@ function AddApplication() {
   const [description, setDescription] = useState("");
   console.log(jobTitle);
 
+  const handleNewJobs = () => {
+    localStorage.setItem("jobTitle", jobTitle);
+  };
+
   //
   return (
     <div className="bg-black/80 backdrop-blur-sm w-screen h-screen absolute flex items-center justify-center">
@@ -65,7 +69,10 @@ function AddApplication() {
             className="bg-white w-full m-h-full rounded-xl  h-90 p-3"
           ></textarea>
         </div>
-        <button className="bg-blue-500 hover:bg-amber-200 p-2 rounded-2xl">
+        <button
+          onClick={handleNewJobs}
+          className="bg-blue-500 hover:bg-amber-200 p-2 rounded-2xl"
+        >
           Save job Application
         </button>
       </div>
