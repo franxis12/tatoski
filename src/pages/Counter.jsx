@@ -15,6 +15,15 @@ const getTimeLeft = () => {
 
 function Counter() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft());
+  const [name, setName] = useState("Jas");
+
+  const handleChangeName = () => {
+    if (name === "Jas") {
+      setName("Fran");
+    } else {
+      setName("Jas");
+    }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
@@ -23,9 +32,12 @@ function Counter() {
 
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-(--PrimaryColor) text-white">
-      <div className="rounded-2xl border border-white/30 bg-black/40 p-10 text-center">
-        <h1 className="mb-6 text-3xl font-semibold">
-          Time remaining to see Jas ❤️
+      <div>
+        <h1
+          className="mb-6 text-3xl font-semibold cursor-pointer"
+          onClick={handleChangeName}
+        >
+          Time remaining to see {name} ❤️
         </h1>
         <div className="grid grid-cols-4 gap-4 text-2xl">
           {Object.entries(timeLeft).map(([label, value]) => (
