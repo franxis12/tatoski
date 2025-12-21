@@ -12,11 +12,18 @@ function AddApplication() {
   const [description, setDescription] = useState("");
   console.log(jobTitle);
 
+  const [jobApplication, setJobApplication] = useState({
+    jobTitle: "",
+    salary: 0,
+    type: "",
+    description: "",
+    date: Date.now(),
+  });
+
   const handleNewJobs = () => {
-    localStorage.setItem("jobTitle", jobTitle);
+    localStorage.setItem("jobTitle", JSON.stringify(jobApplication));
   };
 
-  //
   return (
     <div className="bg-black/80 backdrop-blur-sm w-screen h-screen absolute flex items-center justify-center">
       <div className="min-w-5/8 min-h-5/8 bg-(--CardBg) rounded-2xl border border-slate-50/50 shadow-2xl p-5">
@@ -26,16 +33,18 @@ function AddApplication() {
             <input
               placeholder="Job title"
               className="bg-white rounded-md h-8 p-3"
-              value={jobTitle}
-              onChange={(e) => setJobTitle(e.target.value)}
+              value={jobApplication.jobTitle}
+              onChange={(e) =>
+                setJobApplication((prev) => ({
+                  ...prev,
+                  jobTitle: e.target.value,
+                }))
+              }
             ></input>
           </div>
           {/*Where did applied*/}
           <div></div>
-          <input
-            type="date"
-            className="bg-white rounded-md h-8 p-3 border "
-          ></input>
+          <input type="date" className="bg-white rounded-md h-8 p-3 border" />
         </div>
 
         <div className="flex w-full items-end gap-2 mb-3">
