@@ -13,7 +13,7 @@ function Dashboard() {
       <SideBar />
       <Content />
       {/*This component is absolute and is not part of layout change variable active to true for preview*/}
-      {active && <AddApplication />}
+      {active && <AddApplication active={active} setActive={setActive} />}
     </div>
   );
 }

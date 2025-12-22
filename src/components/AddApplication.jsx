@@ -1,27 +1,42 @@
 import React, { useState } from "react";
-import Input from "../components/Input";
 
-function AddApplication() {
-  const [jobTitle, setJobTitle] = useState(() => {
-    return localStorage.getItem("jobTitle") != null
-      ? localStorage.getItem("jobTitle")
-      : "";
-  });
-  const [salary, setSalary] = useState(0);
-  const [type, setType] = useState("");
-  const [description, setDescription] = useState("");
-  console.log(jobTitle);
+const createEmptyJobApplication = () => ({
+  jobTitle: "",
+  salary: "",
+  type: "",
+  description: "",
+  resume: "",
+  date: "",
+});
 
-  const [jobApplication, setJobApplication] = useState({
-    jobTitle: "",
-    salary: 0,
-    type: "",
-    description: "",
-    date: Date.now(),
-  });
+function AddApplication({ active, setActive }) {
+  const [jobApplication, setJobApplication] = useState(
+    createEmptyJobApplication
+  );
+
+  const setField = (field) => (event) => {
+    const value = event.target.value;
+    setJobApplication((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
 
   const handleNewJobs = () => {
-    localStorage.setItem("jobTitle", JSON.stringify(jobApplication));
+    const storedApplications = JSON.parse(
+      localStorage.getItem("jobApplications") ?? "[]"
+    );
+    const newApplication = {
+      ...jobApplication,
+      id: Date.now(),
+      createdAt: new Date().toISOString(),
+    };
+    const updatedApplications = [...storedApplications, newApplication];
+    localStorage.setItem(
+      "jobApplications",
+      JSON.stringify(updatedApplications)
+    );
+    setJobApplication(createEmptyJobApplication());
   };
 
   return (
@@ -34,17 +49,17 @@ function AddApplication() {
               placeholder="Job title"
               className="bg-white rounded-md h-8 p-3"
               value={jobApplication.jobTitle}
-              onChange={(e) =>
-                setJobApplication((prev) => ({
-                  ...prev,
-                  jobTitle: e.target.value,
-                }))
-              }
+              onChange={setField("jobTitle")}
             ></input>
           </div>
           {/*Where did applied*/}
           <div></div>
-          <input type="date" className="bg-white rounded-md h-8 p-3 border" />
+          <input
+            type="date"
+            className="bg-white rounded-md h-8 p-3 border"
+            value={jobApplication.date}
+            onChange={setField("date")}
+          />
         </div>
 
         <div className="flex w-full items-end gap-2 mb-3">
@@ -53,6 +68,8 @@ function AddApplication() {
             <input
               placeholder="Job title"
               className="bg-white rounded-md h-8 p-3"
+              value={jobApplication.salary}
+              onChange={setField("salary")}
             ></input>
           </div>
           <div className="flex-col flex w-full">
@@ -60,6 +77,8 @@ function AddApplication() {
             <input
               placeholder="Job title"
               className="bg-white rounded-md h-8 p-3"
+              value={jobApplication.type}
+              onChange={setField("type")}
             ></input>
           </div>
 
@@ -68,6 +87,8 @@ function AddApplication() {
             <input
               placeholder="Job title"
               className="bg-white rounded-md h-8 p-3"
+              value={jobApplication.resume ?? ""}
+              onChange={setField("resume")}
             ></input>
           </div>
         </div>
@@ -76,6 +97,8 @@ function AddApplication() {
           <textarea
             placeholder="Paste here your job description"
             className="bg-white w-full m-h-full rounded-xl  h-90 p-3"
+            value={jobApplication.description}
+            onChange={setField("description")}
           ></textarea>
         </div>
         <button
@@ -83,6 +106,12 @@ function AddApplication() {
           className="bg-blue-500 hover:bg-amber-200 p-2 rounded-2xl"
         >
           Save job Application
+        </button>
+        <button
+          onClick={() => setActive(false)}
+          className="bg-red-500 hover:bg-red-900 p-2 rounded-2xl"
+        >
+          Cancel
         </button>
       </div>
     </div>

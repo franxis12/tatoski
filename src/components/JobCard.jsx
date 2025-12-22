@@ -1,10 +1,13 @@
 import React from "react";
 import Button from "./Button";
 
-function JobCard() {
+function JobCard({ id, jobTitle }) {
   return (
-    <div className="w-full h-40 rounded-2xl bg-(--CardBg) p-5 px-5 border border-black">
-      <h2 className="text-white text-lg font-medium">Test Logistics </h2>
+    <div
+      id={id}
+      className="w-full h-40 rounded-2xl bg-(--CardBg) p-5 px-5 border border-black"
+    >
+      <h2 className="text-white text-lg font-medium">{jobTitle}</h2>
       <Button />
     </div>
   );
