@@ -10,9 +10,9 @@ function Dashboard() {
   return (
     <div className="grid h-screen w-screen grid-cols-12 grid-rows-[80px_1fr] bg-(--PrimaryColor)">
       <Header />
-      <SideBar />
+      <SideBar active={active} setActive={setActive} />
       <Content />
-      {/*This component is absolute and is not part of layout change variable active to true for preview*/}
+      {/*This component is absolute and is not part of layout change variable active to true //for preview*/}
       {active && <AddApplication active={active} setActive={setActive} />}
     </div>
   );
