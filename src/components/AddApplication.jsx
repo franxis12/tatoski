@@ -32,11 +32,9 @@ function AddApplication({ active, setActive }) {
       createdAt: new Date().toISOString(),
     };
     const updatedApplications = [...storedApplications, newApplication];
-    localStorage.setItem(
-      "jobApplications",
-      JSON.stringify(updatedApplications)
-    );
+    localStorage.setItem("jobApplications", JSON.stringify(updatedApplications));
     setJobApplication(createEmptyJobApplication());
+    window.dispatchEvent(new Event("jobApplicationsUpdated"));
   };
 
   return (
