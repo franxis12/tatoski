@@ -13,7 +13,7 @@ function Dashboard() {
       <SideBar active={active} setActive={setActive} />
       <Content />
 
-      {/*This component is absolute and is not part of layout change variable active to true //for preview adding git test*//////Test2}
+      {/*This component is absolute and is not part of layout change variable active to true*/}
       {active && <AddApplication active={active} setActive={setActive} />}
     </div>
   );
