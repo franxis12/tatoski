@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import JobCard from "./JobCard";
 
 function Content() {
+  //test
   const [applications, setApplications] = useState([]);
 
   const loadApplications = useCallback(() => {
