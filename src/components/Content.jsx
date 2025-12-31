@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import JobCard from "./JobCard";
 
 function Content() {
-  //test
   const [applications, setApplications] = useState([]);
 
   const loadApplications = useCallback(() => {
@@ -14,6 +13,22 @@ function Content() {
     } catch (error) {
       console.error("Unable to read job applications from storage", error);
       setApplications([]);
+    }
+  }, []);
+
+  const handleDelete = useCallback((id) => {
+    try {
+      const stored = JSON.parse(
+        localStorage.getItem("jobApplications") ?? "[]"
+      );
+      const filtered = (Array.isArray(stored) ? stored : []).filter(
+        (app) => app.id !== id
+      );
+      localStorage.setItem("jobApplications", JSON.stringify(filtered));
+      setApplications(filtered);
+      window.dispatchEvent(new Event("jobApplicationsUpdated"));
+    } catch (error) {
+      console.error("Unable to delete job application", error);
     }
   }, []);
 
@@ -37,7 +52,16 @@ function Content() {
       ) : (
         <div className="flex flex-col gap-4">
           {applications.map((item) => (
-            <JobCard key={item.id} id={item.id} jobTitle={item.jobTitle} />
+            <JobCard
+              key={item.id}
+              id={item.id}
+              jobTitle={item.jobTitle}
+              date={item.date}
+              salary={item.salary}
+              type={item.type}
+              description={item.description}
+              onDelete={() => handleDelete(item.id)}
+            />
           ))}
         </div>
       )}
