@@ -13,7 +13,8 @@ function Dashboard() {
       <SideBar active={active} setActive={setActive} />
       <Content />
 
-      {/*This component is absolute and is not part of layout change variable active to true*/}
+      {/*This component is absolute and is not part of layout change variable active to true. DSSThis 
+      Completes Tgea hjs  dDmekn The dsj Resading \the code te the dd*/}
       {active && <AddApplication active={active} setActive={setActive} />}
     </div>
   );
